@@ -9,12 +9,15 @@ import javax.swing.table.DefaultTableModel;
 
 public class listagemVIEW extends javax.swing.JFrame {
 
-    /**
-     * Creates new form listagemVIEW
-     */
+    private ProdutosDAO listagem;
+    private DefaultTableModel model;
+    private ProdutosDTO produto;
+    
     public listagemVIEW() {
         initComponents();
         listarProdutos();
+        DefaultTableModel model = new DefaultTableModel();
+        
     }
 
     /**
