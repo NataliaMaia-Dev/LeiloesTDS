@@ -14,6 +14,7 @@ public class ProdutosDAO {
     PreparedStatement stmt;
     ResultSet rs;
     ArrayList<ProdutosDTO> listagem = new ArrayList<>();
+    ArrayList<ProdutosDTO> listagemVendidos = new ArrayList<>();
 
     public void cadastrarProduto(ProdutosDTO produto) {
 
@@ -102,6 +103,31 @@ public class ProdutosDAO {
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Erro ao atualizar status do produto: " + e.getMessage());
         }
+    }
+
+    public ArrayList<ProdutosDTO> listarVendidos() {
+        try {
+            conn = new conectaDAO().connectDB();
+
+            String sql = "SELECT id, nome, valor, status FROM produtos where status = 'Vendido'";
+            stmt = conn.prepareStatement(sql);
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                ProdutosDTO produto = new ProdutosDTO();
+                produto.setId(rs.getInt("id"));
+                produto.setNome(rs.getString("nome"));
+                produto.setValor(rs.getDouble("valor"));
+                produto.setStatus(rs.getString("status"));
+
+                listagemVendidos.add(produto);
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Erro ao listar produtos: " + e.getMessage());
+        }
+
+        return listagemVendidos;
     }
 
 }
