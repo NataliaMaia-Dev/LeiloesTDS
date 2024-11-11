@@ -105,7 +105,7 @@ public class ProdutosDAO {
         }
     }
 
-    public ArrayList<ProdutosDTO> listarVendidos() {
+    public ArrayList<ProdutosDTO> listarProdutosVendidos() {
         try {
             conn = new conectaDAO().connectDB();
 
